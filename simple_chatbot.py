@@ -3,13 +3,16 @@ from langgraph.graph import StateGraph, START
 from langgraph.graph.message import add_messages
 from llm_utils import get_llm
 
+llm = get_llm()
+
 # Define state type
 class State(TypedDict):
     messages: Annotated[list, add_messages]
 
+
+
 def chatbot(state: State):
-    """Simple chatbot that responds to messages"""
-    llm = get_llm()
+    """Simple chatbot that responds to messages"""    
     return {"messages": [llm.invoke(state["messages"])]}
 
 # Create and compile graph
